@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0d12">
+<title>Efekan Gökcen — Software Developer</title>
+<meta name="description" content="Ali Efekan Gökcen — Software Developer & Systems Analyst. ERP/CRM mimarileri kuruyor, Sports Simulation Studios'u yönetiyor.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0d12'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%2338bdf8' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d12;
+    --bg-elev:#10141b;
+    --bg-card:#131822;
+    --border:rgba(255,255,255,.08);
+    --border-hover:rgba(56,189,248,.4);
+    --text:#e8ecf1;
+    --text-dim:#9aa5b4;
+    --text-faint:#5a6577;
+    --accent:#38bdf8;
+    --accent-2:#a78bfa;
+    --accent-3:#34d399;
+    --mono:'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', -apple-system, sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:rgba(56,189,248,.3); color:#fff;}
+  canvas#starfield{position:fixed; inset:0; z-index:0; display:block;}
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(56,189,248,.14), transparent),
+      radial-gradient(ellipse 60% 40% at 90% 10%, rgba(167,139,250,.07), transparent);
+    pointer-events:none;
+    z-index:1;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px; position:relative; z-index:2;}
+  h1,h2,h3,h4{font-family:'Space Grotesk', sans-serif; letter-spacing:-.02em;}
+  a{color:inherit; text-decoration:none;}
+  code, .mono{font-family:var(--mono);}
+  svg{display:block;}
+
+  /* reduced motion safety net */
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* custom cursor (desktop only, added via JS) */
+  .cursor-dot,.cursor-ring{position:fixed; top:0; left:0; pointer-events:none; z-index:999; border-radius:50%; transform:translate(-9999px,-9999px); will-change:transform;}
+  .cursor-dot{width:6px;height:6px;background:var(--accent); margin:-3px 0 0 -3px;}
+  .cursor-ring{width:30px;height:30px;border:1px solid rgba(56,189,248,.45); margin:-15px 0 0 -15px; transition:width .2s,height .2s,margin .2s,border-color .2s,background .2s;}
+  .cursor-ring.hover{width:54px;height:54px;margin:-27px 0 0 -27px; background:rgba(56,189,248,.08); border-color:var(--accent);}
+  body.custom-cursor, body.custom-cursor a, body.custom-cursor button{cursor:none !important;}
+  @media (pointer:coarse){ .cursor-dot,.cursor-ring{display:none !important;} }
+
+  /* scroll reveal */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .65s cubic-bezier(.2,.7,.2,1), transform .65s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in-view{opacity:1; transform:none;}
+  .skills-grid .reveal:nth-child(1),.project-grid .reveal:nth-child(1),.method-list .reveal:nth-child(1){transition-delay:.03s;}
+  .skills-grid .reveal:nth-child(2),.project-grid .reveal:nth-child(2),.method-list .reveal:nth-child(2){transition-delay:.11s;}
+  .skills-grid .reveal:nth-child(3),.project-grid .reveal:nth-child(3),.method-list .reveal:nth-child(3){transition-delay:.19s;}
+  .skills-grid .reveal:nth-child(4),.project-grid .reveal:nth-child(4),.method-list .reveal:nth-child(4){transition-delay:.27s;}
+
+  a:focus-visible, button:focus-visible, .btn:focus-visible, .icon-btn:focus-visible{
+    outline:2px solid var(--accent); outline-offset:3px; border-radius:6px;
+  }
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(10,13,18,.72);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .logo{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.05rem; display:flex; align-items:center; gap:8px;}
+  .logo .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent);}
+  .nav-links{display:flex; gap:32px; font-size:.9rem; color:var(--text-dim);}
+  .nav-links a{position:relative; padding:4px 0; transition:color .2s;}
+  .nav-links a::after{content:''; position:absolute; left:0; bottom:0; width:100%; height:1px; background:var(--accent); transform:scaleX(0); transform-origin:right; transition:transform .3s cubic-bezier(.2,.7,.2,1);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{transform:scaleX(1); transform-origin:left;}
+  .nav-cta{display:flex; gap:12px; align-items:center;}
+  .icon-btn{
+    width:42px; height:42px; display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--border); border-radius:9px; color:var(--text-dim); transition:.2s;
+  }
+  .icon-btn svg{width:18px; height:18px;}
+  .icon-btn:hover{color:var(--accent); border-color:var(--border-hover); transform:translateY(-1px);}
+
+  /* HERO */
+  header.hero{padding:164px 0 96px; position:relative;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:.8rem; color:var(--accent-3);
+    background:rgba(52,211,153,.08); border:1px solid rgba(52,211,153,.25);
+    padding:6px 14px; border-radius:100px; margin-bottom:24px;
+  }
+  .eyebrow .pulse{width:6px; height:6px; border-radius:50%; background:var(--accent-3); box-shadow:0 0 8px var(--accent-3); animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.3;}}
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center;}
+  h1.hero-title{
+    font-size:clamp(2.3rem, 5vw, 3.7rem);
+    font-weight:700; line-height:1.08; margin-bottom:22px;
+    background:linear-gradient(180deg, #fff 20%, #b8c2d0 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-title .accent{background:linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero-sub{font-size:clamp(1rem, 1.6vw, 1.15rem); color:var(--text-dim); max-width:560px; margin-bottom:16px;}
+  .hero-loc{font-family:var(--mono); font-size:.85rem; color:var(--text-faint); margin-bottom:38px; display:flex; align-items:center; gap:7px;}
+  .hero-loc svg{width:14px; height:14px; flex-shrink:0;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:52px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 24px; border-radius:10px; font-weight:600; font-size:.92rem;
+    transition:box-shadow .2s, border-color .2s, color .2s; border:1px solid transparent; cursor:pointer;
+  }
+  .btn.magnetic{transition:transform .18s ease-out, box-shadow .2s, border-color .2s, color .2s;}
+  .btn-primary{background:var(--accent); color:#04121c;}
+  .btn-primary:hover{box-shadow:0 0 0 4px rgba(56,189,248,.18);}
+  .btn-ghost{border-color:var(--border); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--border-hover); color:var(--accent);}
+  .hero-stats{display:flex; border:1px solid var(--border); border-radius:14px; overflow:hidden;}
+  .stat{flex:1; padding:18px 20px; border-right:1px solid var(--border);}
+  .stat:last-child{border-right:none;}
+  .stat b{display:block; font-family:'Space Grotesk',sans-serif; font-size:1.4rem; color:var(--accent);}
+  .stat span{font-size:.76rem; color:var(--text-faint);}
+
+  /* terminal */
+  .terminal{
+    background:var(--bg-card); border:1px solid var(--border); border-radius:14px; overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.6);
+  }
+  .terminal-bar{display:flex; gap:7px; padding:13px 16px; border-bottom:1px solid var(--border); background:var(--bg-elev);}
+  .terminal-bar span{width:11px; height:11px; border-radius:50%; background:var(--border);}
+  .terminal-bar span:nth-child(1){background:#ef4444;}
+  .terminal-bar span:nth-child(2){background:#f59e0b;}
+  .terminal-bar span:nth-child(3){background:#22c55e;}
+  .terminal-body{padding:22px 20px; font-family:var(--mono); font-size:.85rem; min-height:190px;}
+  .terminal-body .line1{color:var(--text-dim); margin-bottom:14px;}
+  .terminal-body .prompt{color:var(--accent-3);}
+  .terminal-body .path{color:var(--accent-2);}
+  .terminal-body .cmd{color:var(--text);}
+  #termOut div{color:var(--text-dim); margin-bottom:6px; padding-left:14px; position:relative;}
+  #termOut div::before{content:'›'; position:absolute; left:0; color:var(--accent);}
+  #termOut div:last-child::after{content:'▌'; color:var(--accent); animation:pulse 1s steps(2) infinite; margin-left:2px;}
+
+  /* SECTION shared */
+  section{padding:96px 0; position:relative; border-top:1px solid var(--border);}
+  .section-head{margin-bottom:52px; max-width:620px;}
+  .section-tag{font-family:var(--mono); font-size:.8rem; color:var(--accent); margin-bottom:12px; display:flex; align-items:center; gap:10px;}
+  .section-tag::before{content:''; width:24px; height:1px; background:var(--accent);}
+  .section-head h2{font-size:clamp(1.7rem, 3.5vw, 2.3rem); margin-bottom:14px;}
+  .section-head p{color:var(--text-dim); font-size:1.02rem;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:start;}
+  .about-body p{color:var(--text-dim); margin-bottom:18px; font-size:1.02rem;}
+  .about-body strong{color:var(--text); font-weight:600;}
+  .method-list{list-style:none; display:flex; flex-direction:column; gap:12px;}
+  .method-list li{
+    display:flex; align-items:center; gap:12px; font-size:.9rem; color:var(--text-dim);
+    padding:15px 16px; background:var(--bg-card); border:1px solid var(--border); border-radius:10px;
+    transition:border-color .2s, transform .2s;
+  }
+  .method-list li:hover{border-color:var(--border-hover); transform:translateX(3px);}
+  .method-list li svg{width:16px; height:16px; color:var(--accent); flex-shrink:0;}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;}
+  .skill-card{
+    background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:26px;
+    transition:border-color .25s, transform .25s;
+  }
+  .skill-card:hover{border-color:var(--border-hover); transform:translateY(-3px);}
+  .skill-card h4{font-size:.95rem; margin-bottom:16px; color:var(--text); display:flex; align-items:center; gap:10px;}
+  .skill-card h4 svg{width:17px; height:17px; color:var(--accent);}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:var(--mono); font-size:.78rem; padding:6px 12px; border-radius:7px;
+    background:rgba(56,189,248,.06); border:1px solid rgba(56,189,248,.18); color:#bcd8ea;
+    transition:border-color .2s, background .2s, transform .2s;
+  }
+  .chip:hover{border-color:var(--accent); background:rgba(56,189,248,.12); transform:translateY(-1px);}
+
+  /* PROJECTS */
+  .project-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .project-card{
+    background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:28px;
+    display:flex; flex-direction:column; gap:16px; position:relative; overflow:hidden;
+    transition:transform .25s ease-out, border-color .25s, box-shadow .25s;
+    transform-style:preserve-3d;
+  }
+  .project-card::before{
+    content:''; position:absolute; inset:0; opacity:0; transition:opacity .3s; pointer-events:none;
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%), rgba(56,189,248,.13), transparent 60%);
+  }
+  .project-card:hover{border-color:var(--border-hover); box-shadow:0 24px 48px -24px rgba(0,0,0,.55);}
+  .project-card:hover::before{opacity:1;}
+  .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px;}
+  .project-icon{
+    width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, rgba(56,189,248,.15), rgba(167,139,250,.1));
+  }
+  .project-icon svg{width:21px; height:21px; color:var(--accent);}
+  .project-link{color:var(--text-faint); transition:color .2s, transform .2s;}
+  .project-link svg{width:18px; height:18px;}
+  .project-card:hover .project-link{color:var(--accent); transform:translate(2px,-2px);}
+  .project-card h3{font-size:1.15rem; margin-bottom:2px;}
+  .project-card .ptag{font-family:var(--mono); font-size:.72rem; color:var(--accent-3);}
+  .project-card p{color:var(--text-dim); font-size:.92rem; flex:1;}
+  .project-stack{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto;}
+  .project-stack span{
+    font-family:var(--mono); font-size:.72rem; padding:4px 9px; border-radius:6px;
+    background:var(--bg-elev); border:1px solid var(--border); color:var(--text-dim);
+  }
+
+  /* STUDIO SPOTLIGHT */
+  .studio{
+    border-radius:20px; padding:52px; position:relative; overflow:hidden;
+    background:linear-gradient(135deg, rgba(56,189,248,.08), rgba(167,139,250,.05));
+    border:1px solid var(--border-hover);
+  }
+  .studio .bg-icon{position:absolute; right:-30px; bottom:-50px; width:340px; height:340px; opacity:.06; color:var(--accent); pointer-events:none;}
+  .studio-inner{position:relative; max-width:640px;}
+  .studio .eyebrow{margin-bottom:20px;}
+  .studio h2{font-size:clamp(1.6rem,3vw,2.1rem); margin-bottom:16px;}
+  .studio p{color:var(--text-dim); margin-bottom:26px; font-size:1rem;}
+  .studio-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:30px;}
+
+  /* CONTACT */
+  .contact-box{
+    text-align:center; padding:70px 40px; border-radius:20px;
+    background:radial-gradient(ellipse at center, rgba(56,189,248,.08), transparent 70%);
+    border:1px solid var(--border);
+  }
+  .contact-box h2{font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:16px;}
+  .contact-box p{color:var(--text-dim); max-width:480px; margin:0 auto 36px; font-size:1.02rem;}
+  .contact-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+
+  footer{padding:36px 0; border-top:1px solid var(--border);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  footer p{color:var(--text-faint); font-size:.85rem; font-family:var(--mono);}
+  .footer-links{display:flex; gap:20px;}
+  .footer-links a{color:var(--text-faint); transition:.2s;}
+  .footer-links a:hover{color:var(--accent);}
+
+  @media (max-width:820px){
+    .nav-links{display:none;}
+    .hero-grid, .about-grid, .skills-grid, .project-grid{grid-template-columns:1fr;}
+    .hero-stats{flex-wrap:wrap;}
+    .stat{flex:1 1 50%; border-right:1px solid var(--border);}
+    .stat:nth-child(2n){border-right:none;}
+    .stat:nth-child(n+3){border-top:1px solid var(--border);}
+    .studio{padding:36px 24px;}
+    footer .wrap{flex-direction:column; text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="starfield" aria-hidden="true"></canvas>
+
+<nav>
+  <div class="wrap">
+    <a href="#top" class="logo"><span class="dot"></span>efekangokcen<span style="color:var(--text-faint)">.dev</span></a>
+    <div class="nav-links">
+      <a href="#about">Hakkımda</a>
+      <a href="#skills">Yetenekler</a>
+      <a href="#projects">Projeler</a>
+      <a href="#studio">Sports Simulation</a>
+      <a href="#contact">İletişim</a>
+    </div>
+    <div class="nav-cta">
+      <a class="icon-btn" href="https://github.com/efekangokcen" target="_blank" rel="noopener" aria-label="GitHub profilim">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.08 3.29 9.38 7.86 10.9.57.1.78-.25.78-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.75 2.7 1.24 3.36.95.1-.75.4-1.24.73-1.53-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.15v3.19c0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5Z"/></svg>
+      </a>
+      <a class="icon-btn" href="https://www.linkedin.com/in/efekangokcen/" target="_blank" rel="noopener" aria-label="LinkedIn profilim">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+      </a>
+      <a class="btn btn-ghost" style="padding:9px 18px; font-size:.85rem;" href="mailto:efekangokcen@gmail.com">İletişime Geç</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="pulse"></span>şu an yeni projelere açığım</div>
+        <h1 class="hero-title">Kod yazıyorum,<br>sistem <span class="accent">kuruyorum.</span></h1>
+        <p class="hero-sub">Yönetim Bilişim Sistemleri okudum ama işin çoğunu koda dökerek öğrendim. Günümün büyük kısmı ERP/CRM sistemleri kurmakla, kalanı da kendi stüdyomda hakemlere karar vermeyi öğreten bir simülasyon yazmakla geçiyor.</p>
+        <div class="hero-loc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Denizli, Türkiye
+        </div>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary magnetic">Projelerime Bak →</a>
+          <a href="https://github.com/efekangokcen" target="_blank" rel="noopener" class="btn btn-ghost">GitHub'da Gez</a>
+        </div>
+        <div class="hero-stats reveal">
+          <div class="stat"><b>4+</b><span>Yayında Proje</span></div>
+          <div class="stat"><b>2</b><span>ERP / CRM Sistemi</span></div>
+          <div class="stat"><b>1</b><span>Kurduğum Stüdyo</span></div>
+          <div class="stat"><b>∞</b><span>Debug Session</span></div>
+        </div>
+      </div>
+      <div class="terminal reveal">
+        <div class="terminal-bar"><span></span><span></span><span></span></div>
+        <div class="terminal-body">
+          <p class="line1"><span class="prompt">efekan@dev</span> <span class="path">~</span> <span class="cmd">% whoami</span></p>
+          <div id="termOut"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">01 · HAKKIMDA</div>
+      <h2>Önce süreci anlarım, sonra ekranı açarım</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p>Üniversitede <strong>Yönetim Bilişim Sistemleri</strong> okudum ama işe ticaret tarafında başladım. Sonradan fark ettim ki o taraftan gelmiş olmak aslında işime yarıyor — bugün bir ERP ya da CRM kurarken önce süreç gerçekte sahada nasıl işliyor diye soruyorum, koda öyle başlıyorum.</p>
+        <p>Günümün büyük kısmı <strong>Next.js, .NET ve PostgreSQL</strong> ile kurumsal sistemler kurmakla geçiyor. Kalan kısmı ise kendi kurduğum <strong>Sports Simulation Studios</strong>'ta — Unity ve C# ile hakemlerin saha içindeki karar anlarını simüle eden bir eğitim aracı üzerinde.</p>
+        <p>GPT-4o'yu bir iş akışına bağlamak ya da MCP ile araçları birbirine konuşturmak gibi şeylerle uğraşmayı seviyorum. Ama sonunda gerçek bir kullanıcının dokunacağı bir şey ortaya çıkmıyorsa, çok da enerjimi harcamam.</p>
+      </div>
+      <ul class="method-list">
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Önce süreci anlarım, sonra ekranı açarım</li>
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="10" rx="1"/><rect x="17" y="4" width="5" height="13" rx="1"/></svg>Scrum'ı araç olarak kullanırım, din olarak değil</li>
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Requirement toplarken en çok soru soran kişi benimdir</li>
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg>Veriye bakmadan karar vermem</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">02 · TEKNOLOJİ</div>
+      <h2>Elimin altında olanlar</h2>
+      <p>Fikirden production'a kadar kullandığım diller, framework'ler ve araçlar.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg> Diller</h4>
+        <div class="chip-row">
+          <span class="chip">C#</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span>
+          <span class="chip">PHP</span><span class="chip">Python</span><span class="chip">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/></svg> Framework &amp; Web</h4>
+        <div class="chip-row">
+          <span class="chip">Next.js 16</span><span class="chip">React 19</span><span class="chip">.NET Core</span>
+          <span class="chip">ASP.NET Core</span><span class="chip">Laravel</span><span class="chip">Tailwind v4</span><span class="chip">Node.js</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg> Veritabanı &amp; Bulut</h4>
+        <div class="chip-row">
+          <span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">Prisma ORM</span>
+          <span class="chip">MSSQL</span><span class="chip">MySQL</span><span class="chip">Vercel</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> AI, Simülasyon &amp; Araçlar</h4>
+        <div class="chip-row">
+          <span class="chip">Unity 3D</span><span class="chip">OpenAI GPT-4o</span><span class="chip">MCP</span>
+          <span class="chip">Git</span><span class="chip">Docker</span><span class="chip">Photoshop</span><span class="chip">Postman</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">03 · PROJELER</div>
+      <h2>Üzerinde çalıştığım işler</h2>
+      <p>Kurumsal ERP'den yapay zekâ destekli pazarlama platformuna, gerçek kullanıcısı olan şeyler.</p>
+    </div>
+    <div class="project-grid">
+
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1M9 13h1m4 0h1M9 17h1m4 0h1"/></svg></div>
+          <a class="project-link" href="https://github.com/efekangokcen/yapigranit-crm" target="_blank" rel="noopener" aria-label="Repoya git">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M17 7H8m9 0v9"/></svg>
+          </a>
+        </div>
+        <div>
+          <span class="ptag">ENTERPRISE / ERP</span>
+          <h3>YapıGranit ERP</h3>
+        </div>
+        <p>Bir doğal taş fabrikasının üretimden muhasebeye tüm süreçlerini tek çatı altına topladığım bir ERP. En çok kafa yorduğum kısım 2D kesim yerleşim algoritmasıydı — malzeme israfını gözle görülür şekilde düşürüyor.</p>
+        <div class="project-stack">
+          <span>Next.js 16</span><span>Prisma</span><span>PostgreSQL</span><span>Tailwind v4</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="10" rx="1"/><rect x="17" y="4" width="5" height="13" rx="1"/></svg></div>
+          <a class="project-link" href="https://github.com/efekangokcen/dou-social-crm" target="_blank" rel="noopener" aria-label="Repoya git">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M17 7H8m9 0v9"/></svg>
+          </a>
+        </div>
+        <div>
+          <span class="ptag">AGENCY / CRM</span>
+          <h3>DOU Social CRM</h3>
+        </div>
+        <p>Bir ajansın satıştan operasyona kadar tüm iş akışını yönettiği CRM. Departmanlar Kanban board üzerinden çalışıyor, aramalar Vercel Cron ile otomatik hatırlatılıyor, müşteri şifreleri AES-256 ile şifreli bir kasada duruyor.</p>
+        <div class="project-stack">
+          <span>Next.js 16</span><span>React 19</span><span>Supabase</span><span>AES-256</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/></svg></div>
+          <a class="project-link" href="https://github.com/efekangokcen/dou-social-web" target="_blank" rel="noopener" aria-label="Repoya git">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M17 7H8m9 0v9"/></svg>
+          </a>
+        </div>
+        <div>
+          <span class="ptag">AI / MARKETING</span>
+          <h3>DOU Social Web</h3>
+        </div>
+        <p>GPT-4o Vision ile hem metni hem ekran görüntüsünü okuyup bir markanın sosyal medya hesabını otomatik denetleyen bir sistem kurdum. Üstüne influencer vitrini ve MDX tabanlı programatik SEO içerikleri ekledim.</p>
+        <div class="project-stack">
+          <span>Next.js 16</span><span>OpenAI GPT-4o</span><span>i18n</span><span>MDX</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div>
+        </div>
+        <div>
+          <span class="ptag">SPORTS SIMULATION STUDIOS</span>
+          <h3>Referee Simulator</h3>
+        </div>
+        <p>Unity üzerinde, hakemlerin saha içindeki karar anlarını simüle eden bir eğitim aracı. Senaryo tekrarı yapabiliyorsun, kamerayı serbest bırakıp olayı farklı açılardan izleyebiliyorsun, sistem kararı gerçek zamanlı puanlıyor.</p>
+        <div class="project-stack">
+          <span>Unity 3D</span><span>C#</span><span>SQL</span><span>AI Decision Engine</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="studio">
+  <div class="wrap">
+    <div class="studio reveal">
+      <svg class="bg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+      <div class="studio-inner">
+        <div class="eyebrow"><span class="pulse"></span>Kurucu · Lead Developer</div>
+        <h2>Sports Simulation Studios</h2>
+        <p>Bir noktada "bu iş sadece kurumsal yazılımdan ibaret kalmasın" dedim ve kendi stüdyomu kurdum. Unity ve C# ile hakemlerin saha içindeki karar anlarını simüle eden bir eğitim aracı üzerinde çalışıyorum — amaç, bir videoyu izleyerek değil, o anı bizzat yaşayarak öğrenmeyi mümkün kılmak. Bu site de zaten stüdyonun alan adında duruyor.</p>
+        <div class="studio-tags">
+          <span class="chip">Unity 3D</span><span class="chip">C#</span><span class="chip">AI Decision Engine</span><span class="chip">Real-time Scoring</span>
+        </div>
+        <a href="mailto:efekangokcen@gmail.com?subject=Sports%20Simulation%20Studios" class="btn btn-primary magnetic">Merak Ettiysen Yaz →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <h2>Aklında bir proje mi var?</h2>
+      <p>ERP/CRM kurmak, bir platforma yapay zekâ eklemek ya da tuhaf bir simülasyon fikri — ne olursa olsun bir mail at, konuşuruz.</p>
+      <div class="contact-actions">
+        <a href="mailto:efekangokcen@gmail.com" class="btn btn-primary magnetic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M3 6l9 6 9-6M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/></svg>
+          efekangokcen@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/efekangokcen/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+        <a href="https://github.com/efekangokcen" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="year"></span> Ali Efekan Gökcen — Denizli, Türkiye</p>
+    <div class="footer-links">
+      <a href="https://github.com/efekangokcen" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/efekangokcen/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:efekangokcen@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isCoarse = window.matchMedia('(pointer: coarse)').matches;
+
+  /* ---------- starfield ---------- */
+  (function starfield(){
+    var canvas = document.getElementById('starfield');
+    var ctx = canvas.getContext('2d');
+    var w,h,stars=[];
+    var DPR = Math.min(window.devicePixelRatio||1, 2);
+
+    function resize(){
+      w = canvas.width = window.innerWidth*DPR;
+      h = canvas.height = window.innerHeight*DPR;
+      canvas.style.width = window.innerWidth+'px';
+      canvas.style.height = window.innerHeight+'px';
+      var count = Math.min(130, Math.floor((window.innerWidth*window.innerHeight)/9500));
+      stars = [];
+      for(var i=0;i<count;i++){
+        stars.push({
+          x: Math.random()*w, y: Math.random()*h,
+          r: (Math.random()*1.3+0.4)*DPR,
+          baseAlpha: Math.random()*0.5+0.25,
+          phase: Math.random()*Math.PI*2,
+          speed: Math.random()*0.4+0.15,
+          dx: (Math.random()-0.5)*0.04*DPR,
+          dy: (Math.random()-0.5)*0.04*DPR
+        });
+      }
+    }
+
+    var mx=-9999, my=-9999;
+    window.addEventListener('mousemove', function(e){ mx=e.clientX*DPR; my=e.clientY*DPR; });
+
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      for(var i=0;i<stars.length;i++){
+        var s = stars[i];
+        s.x += s.dx; s.y += s.dy;
+        if(s.x<0) s.x=w; if(s.x>w) s.x=0;
+        if(s.y<0) s.y=h; if(s.y>h) s.y=0;
+        var tw = reduceMotion ? s.baseAlpha : s.baseAlpha + Math.sin(performance.now()*0.001*s.speed + s.phase)*0.22;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(190,215,255,'+Math.max(0,tw).toFixed(3)+')';
+        ctx.fill();
+        var dx = s.x-mx, dy = s.y-my;
+        var dist = Math.sqrt(dx*dx+dy*dy);
+        var radius = 130*DPR;
+        if(dist < radius){
+          ctx.beginPath();
+          ctx.moveTo(s.x, s.y);
+          ctx.lineTo(mx, my);
+          ctx.strokeStyle = 'rgba(56,189,248,'+((1-dist/radius)*0.3).toFixed(3)+')';
+          ctx.lineWidth = 1*DPR;
+          ctx.stroke();
+        }
+      }
+      if(!reduceMotion) requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    document.addEventListener('visibilitychange', function(){
+      if(!document.hidden && !reduceMotion) requestAnimationFrame(draw);
+    });
+    draw();
+  })();
+
+  /* ---------- custom cursor ---------- */
+  if(!isCoarse && !reduceMotion){
+    var dot = document.createElement('div'); dot.className='cursor-dot';
+    var ring = document.createElement('div'); ring.className='cursor-ring';
+    document.body.appendChild(dot); document.body.appendChild(ring);
+    document.body.classList.add('custom-cursor');
+    var rx=0, ry=0, cmx=0, cmy=0;
+    window.addEventListener('mousemove', function(e){
+      cmx=e.clientX; cmy=e.clientY;
+      dot.style.transform = 'translate('+cmx+'px,'+cmy+'px)';
+    });
+    (function loop(){
+      rx += (cmx-rx)*0.16; ry += (cmy-ry)*0.16;
+      ring.style.transform = 'translate('+rx+'px,'+ry+'px)';
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a, button, .btn, .icon-btn, .project-card, .chip').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ ring.classList.add('hover'); });
+      el.addEventListener('mouseleave', function(){ ring.classList.remove('hover'); });
+    });
+  }
+
+  /* ---------- magnetic buttons ---------- */
+  if(!isCoarse){
+    document.querySelectorAll('.magnetic').forEach(function(el){
+      el.addEventListener('mousemove', function(e){
+        var r = el.getBoundingClientRect();
+        var relX = e.clientX - r.left - r.width/2;
+        var relY = e.clientY - r.top - r.height/2;
+        el.style.transform = 'translate('+(relX*0.22).toFixed(1)+'px,'+(relY*0.32).toFixed(1)+'px)';
+      });
+      el.addEventListener('mouseleave', function(){ el.style.transform=''; });
+    });
+  }
+
+  /* ---------- project card tilt ---------- */
+  if(!isCoarse && !reduceMotion){
+    document.querySelectorAll('.project-card').forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left)/r.width - 0.5;
+        var py = (e.clientY - r.top)/r.height - 0.5;
+        card.style.transform = 'perspective(700px) rotateX('+(-py*6).toFixed(2)+'deg) rotateY('+(px*8).toFixed(2)+'deg) translateY(-4px)';
+        card.style.setProperty('--mx', ((px+0.5)*100).toFixed(1)+'%');
+        card.style.setProperty('--my', ((py+0.5)*100).toFixed(1)+'%');
+      });
+      card.addEventListener('mouseleave', function(){ card.style.transform=''; });
+    });
+  }
+
+  /* ---------- scroll reveal ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if(reduceMotion){
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -60px 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- terminal typewriter ---------- */
+  (function(){
+    var out = document.getElementById('termOut');
+    var lines = ['Full-stack developer, Denizli/TR', 'Şu an: Next.js · .NET · Unity', 'Kahve durumu: sürekli dolu'];
+    var terminal = document.querySelector('.terminal');
+    var typed = false;
+
+    function type(){
+      if(typed) return;
+      typed = true;
+      if(reduceMotion){
+        lines.forEach(function(l){ var d=document.createElement('div'); d.textContent=l; out.appendChild(d); });
+        return;
+      }
+      var li=0;
+      function nextLine(){
+        if(li>=lines.length) return;
+        var div = document.createElement('div');
+        out.appendChild(div);
+        var text = lines[li], ci=0;
+        var iv = setInterval(function(){
+          div.textContent = text.slice(0, ci+1);
+          ci++;
+          if(ci>text.length){
+            clearInterval(iv);
+            li++;
+            setTimeout(nextLine, 260);
+          }
+        }, 24);
+      }
+      nextLine();
+    }
+
+    if('IntersectionObserver' in window){
+      var tio = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){ if(entry.isIntersecting){ type(); tio.disconnect(); } });
+      }, {threshold:0.3});
+      tio.observe(terminal);
+    } else { type(); }
+  })();
+})();
+</script>
+</body>
+</html>
