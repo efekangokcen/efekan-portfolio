@@ -180,7 +180,7 @@
     }
 
     .wrap {
-      max-width: 1160px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
       position: relative;
@@ -231,7 +231,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 72px;
+      height: 76px;
     }
 
     /* SLEEK ULTRA-CORPORATE MONOGRAM LOGO */
@@ -244,15 +244,15 @@
       flex-shrink: 0;
     }
     .aeg-symbol {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 10px;
       background: #0f172a;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       color: #ffffff;
       letter-spacing: -0.04em;
       box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
@@ -264,7 +264,7 @@
       flex-direction: column;
     }
     .aeg-name {
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       font-weight: 800;
       color: #0f172a;
       line-height: 1.1;
@@ -279,16 +279,17 @@
       text-transform: uppercase;
     }
 
+    /* DESKTOP NAVBAR LINKS (SPACIOUS & EXPANDED) */
     .nav-links {
       display: flex;
-      gap: 28px;
-      font-size: 0.92rem;
+      gap: 38px;
+      font-size: 0.94rem;
       color: var(--text-dim);
       font-weight: 600;
     }
     .nav-links a {
       position: relative;
-      padding: 4px 0;
+      padding: 6px 0;
       transition: color 0.2s ease;
       white-space: nowrap;
     }
@@ -307,7 +308,7 @@
     }
     .nav-links a:hover { color: var(--primary); }
     .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
-    .nav-cta { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+    .nav-cta { display: flex; gap: 14px; align-items: center; flex-shrink: 0; }
 
     /* APPLE BUTTON SYSTEM */
     .btn {
@@ -1132,7 +1133,16 @@
     .footer-links a { color: var(--text-faint); transition: color 0.2s; font-size: 0.9rem; font-weight: 500; }
     .footer-links a:hover { color: var(--primary); }
 
-    /* ULTRA CLEAN MOBILE RESPONSIVE MEDIA QUERIES (<960px & <640px) */
+    /* DESKTOP EXCLUSIVE SPACING (& MOBİLİ BOZMAYAN RESPONSIVE MEDIA QUERIES) */
+    @media (min-width: 961px) {
+      .nav-links { gap: 32px; }
+      .nav-cta { gap: 12px; }
+    }
+
+    @media (max-width: 1080px) and (min-width: 961px) {
+      .nav-links { gap: 20px; font-size: 0.88rem; }
+    }
+
     @media (max-width: 960px) {
       header.hero { padding: 110px 0 45px; }
       nav .wrap { height: 64px; }
@@ -2040,7 +2050,7 @@
       }
 
       printLines([
-        'Sistem Başlatıldı: Ali Efekan Gökcen CLI v20.0 (%800 Google Search Console Verified)',
+        'Sistem Başlatıldı: Ali Efekan Gökcen CLI v21.0 (%800 Google Search Console Verified)',
         'İletişim: +90 542 698 2627 | WhatsApp İletişim Açık'
       ]);
 
