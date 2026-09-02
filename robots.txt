@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# GEO & Local SEO Sitemap Index
 Sitemap: https://sportssimulation.net/sitemap.xml
