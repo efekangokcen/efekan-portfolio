@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
 
-  <!-- Primary Meta Tags (Local SEO & Marketing Funnel Optimized) -->
+  <!-- Primary Meta Tags (Local SEO & Mobile Responsive) -->
   <title>Ali Efekan Gökcen — Denizli Web Tasarım &amp; Freelancer Yazılımcı</title>
   <meta name="title" content="Ali Efekan Gökcen — Denizli Web Tasarım &amp; Freelancer Yazılımcı">
   <meta name="description" content="Denizli'de müşteri kazandıran kurumsal web siteleri, özel ERP/CRM yazılımları ve yapay zekâ çözümleri. Ücretsiz fiyat teklifi almak için WhatsApp: +90 542 698 2627.">
@@ -340,7 +340,7 @@
       box-shadow: 0 14px 40px rgba(37, 211, 102, 0.55);
     }
 
-    /* FUNNEL STEP 1: ATTENTION (HERO HEADER) */
+    /* HERO HEADER */
     header.hero {
       padding: 165px 0 90px;
       position: relative;
@@ -378,9 +378,9 @@
       50% { opacity: 0.3; }
     }
     h1.hero-title {
-      font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+      font-size: clamp(2rem, 5vw, 3.8rem);
       font-weight: 900;
-      line-height: 1.08;
+      line-height: 1.1;
       margin-bottom: 22px;
       color: #0f172a;
     }
@@ -392,7 +392,7 @@
     }
 
     .hero-sub {
-      font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+      font-size: clamp(1.02rem, 1.6vw, 1.2rem);
       color: var(--text-dim);
       max-width: 600px;
       margin-bottom: 26px;
@@ -541,7 +541,7 @@
       color: #ffffff;
     }
 
-    /* FUNNEL STEP 2: INTEREST (PROBLEM & SOLUTION COMPARISON) */
+    /* INTEREST COMPARISON SECTION */
     .funnel-interest-section {
       padding: 95px 0;
       background: #ffffff;
@@ -572,7 +572,7 @@
     .comp-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
     .comp-list li { font-size: 0.96rem; display: flex; gap: 12px; line-height: 1.5; }
 
-    /* FUNNEL SERVICES GRID */
+    /* SERVICES GRID */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -618,7 +618,7 @@
       gap: 6px;
     }
 
-    /* FUNNEL STEP 3: DESIRE & PROOF (FAQ ACCORDION & PROJECTS) */
+    /* FAQ ACCORDION */
     .faq-container {
       max-width: 800px;
       margin: 48px auto 0;
@@ -675,7 +675,7 @@
       font-weight: 700;
     }
     .section-tag::before { content: ''; width: 28px; height: 3px; background: var(--primary); border-radius: 3px; }
-    .section-head h2 { font-size: clamp(2rem, 3.8vw, 2.6rem); font-weight: 800; margin-bottom: 16px; color: var(--text); }
+    .section-head h2 { font-size: clamp(1.8rem, 3.8vw, 2.6rem); font-weight: 800; margin-bottom: 16px; color: var(--text); }
     .section-head p { color: var(--text-dim); font-size: 1.08rem; }
 
     /* ABOUT SECTION */
@@ -813,23 +813,7 @@
     }
     .project-more-btn { font-family: var(--font-mono); font-size: 0.8rem; color: var(--primary); font-weight: 700; }
 
-    /* STUDIO & AR-GE SPOTLIGHT */
-    .studio {
-      border-radius: 28px;
-      padding: 60px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(79, 70, 229, 0.06), rgba(236, 72, 153, 0.04));
-      border: 1px solid rgba(79, 70, 229, 0.2);
-      box-shadow: 0 10px 35px rgba(79, 70, 229, 0.05);
-    }
-    .studio-inner { position: relative; max-width: 680px; }
-    .studio .eyebrow { margin-bottom: 22px; }
-    .studio h2 { font-size: clamp(2rem, 3.5vw, 2.5rem); margin-bottom: 20px; font-weight: 800; }
-    .studio p { color: var(--text-dim); margin-bottom: 28px; font-size: 1.08rem; line-height: 1.75; }
-    .studio-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 34px; }
-
-    /* FUNNEL STEP 4: ACTION (HIGH CONVERSION CONTACT BOX) */
+    /* CONTACT SECTION */
     .contact-box {
       text-align: center;
       padding: 80px 40px;
@@ -838,7 +822,7 @@
       border: 1px solid var(--border);
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
     }
-    .contact-box h2 { font-size: clamp(2.2rem, 4.5vw, 2.9rem); margin-bottom: 18px; font-weight: 800; }
+    .contact-box h2 { font-size: clamp(1.9rem, 4.5vw, 2.9rem); margin-bottom: 18px; font-weight: 800; }
     .contact-box p { color: var(--text-dim); max-width: 580px; margin: 0 auto 40px; font-size: 1.08rem; }
     .contact-direct-card {
       display: inline-flex;
@@ -932,20 +916,45 @@
     footer { padding: 44px 0; border-top: 1px solid var(--border); background: #ffffff; }
     footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
     footer p { color: var(--text-faint); font-size: 0.9rem; font-family: var(--font-mono); }
-    .footer-links { display: flex; gap: 24px; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
     .footer-links a { color: var(--text-faint); transition: color 0.2s; font-size: 0.92rem; font-weight: 500; }
     .footer-links a:hover { color: var(--primary); }
 
-    /* RESPONSIVE BREAKPOINTS */
-    @media (max-width: 900px) {
+    /* COMPREHENSIVE MOBILE RESPONSIVE MEDIA QUERIES */
+    @media (max-width: 960px) {
+      header.hero { padding: 125px 0 60px; }
+      nav .wrap { height: 68px; }
       .nav-links { display: none; }
-      .hero-grid, .about-grid, .skills-grid, .project-grid, .services-grid, .comparison-grid { grid-template-columns: 1fr; }
+      .hero-grid, .about-grid, .skills-grid, .project-grid, .services-grid, .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
       .hero-stats { flex-wrap: wrap; }
       .stat { flex: 1 1 50%; border-right: 1px solid var(--border); }
       .stat:nth-child(2n) { border-right: none; }
       .stat:nth-child(n+3) { border-top: 1px solid var(--border); }
-      .studio { padding: 36px 24px; }
+      .contact-box { padding: 50px 20px; }
+      .floating-whatsapp { bottom: 20px; right: 20px; padding: 12px 18px; font-size: 0.85rem; }
       footer .wrap { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { padding: 0 16px; }
+      h1.hero-title { font-size: 2.1rem; }
+      .hero-sub { font-size: 0.98rem; }
+      .btn { width: 100%; text-align: center; justify-content: center; padding: 14px 20px; }
+      .hero-actions { flex-direction: column; gap: 12px; width: 100%; }
+      .hero-contact-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .phone-badge { width: 100%; justify-content: center; }
+      .comp-card { padding: 24px 18px; }
+      .service-card { padding: 24px 20px; }
+      .project-card { padding: 24px 20px; }
+      .skill-card { padding: 24px 18px; }
+      .contact-direct-card { width: 100%; justify-content: center; font-size: 0.95rem; }
+      .contact-actions { flex-direction: column; width: 100%; }
+      .faq-question { padding: 18px 20px; font-size: 0.96rem; }
+      .faq-answer { padding: 0 20px 18px; font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -1271,7 +1280,7 @@
       <div class="section-head apple-reveal">
         <div class="section-tag">SIKÇA SORULAN SORULAR</div>
         <h2>Aklınıza Takılabilecek Sorular</h2>
-        <p>Müşterilerimin en çok sorduğu sorular ve şeffaf yanıtlarım.</p>
+        <p>Müşterilerımın en çok sorduğu sorular ve şeffaf yanıtlarım.</p>
       </div>
 
       <div class="faq-container apple-reveal">
@@ -1659,7 +1668,7 @@
       }
 
       printLines([
-        'Sistem Başlatıldı: Ali Efekan Gökcen CLI v8.0 (Marketing Funnel Engine)',
+        'Sistem Başlatıldı: Ali Efekan Gökcen CLI v8.5 (Mobile Responsive)',
         'İletişim: +90 542 698 2627 | WhatsApp İletişim Açık'
       ]);
 
