@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
 
-  <!-- Primary Meta Tags (Denizli AI Web Sitesi & Local SEO Optimization) -->
+  <!-- Primary Meta Tags -->
   <title>Ali Efekan Gökcen — Denizli AI Web Sitesi Yaptırma &amp; Web Tasarım</title>
   <meta name="title" content="Ali Efekan Gökcen — Denizli AI Web Sitesi Yaptırma &amp; Web Tasarım">
-  <meta name="description" content="Denizli AI web sitesi yaptırmak ve kurumsal web tasarım için Ali Efekan Gökcen. Denizli'de yapay zekâ destekli hızlı web siteleri, özel ERP/CRM yazılımları. WhatsApp: +90 542 698 2627.">
-  <meta name="keywords" content="Denizli web sitesi, Denizli AI web sitesi yaptırmak, Denizli yapay zeka web sitesi, Denizli web tasarım, Denizli freelancer yazılımcı, Denizli özel yazılım, Denizli kurumsal web sitesi, Denizli ERP yazılımı, Pamukkale web tasarım, Merkezefendi yazılım, Ali Efekan Gökcen">
+  <meta name="description" content="Denizli'de Pamair, EN20 ve YapıGranit gibi kurumsal markaların güvendiği AI web sitesi yaptırma, web tasarım ve özel ERP/CRM yazılımları. WhatsApp: +90 542 698 2627.">
+  <meta name="keywords" content="Denizli web sitesi, Denizli AI web sitesi yaptırmak, Denizli yapay zeka web sitesi, Pamair, EN20, Denizli web tasarım, Denizli freelancer yazılımcı, Denizli özel yazılım, Denizli kurumsal web sitesi, Denizli ERP yazılımı, Ali Efekan Gökcen">
   <meta name="author" content="Ali Efekan Gökcen">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://sportssimulation.net/">
@@ -24,7 +24,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sportssimulation.net/">
   <meta property="og:title" content="Ali Efekan Gökcen — Denizli AI Web Sitesi Yaptırma &amp; Web Tasarım">
-  <meta property="og:description" content="Denizli'de AI destekli web sitesi yaptırmak, özel ERP/CRM yazılımları ve yapay zekâ entegrasyonu çözümleri. WhatsApp: +90 542 698 2627.">
+  <meta property="og:description" content="Pamair, EN20 gibi Denizli kurumsal firmalarına özel AI web tasarımı ve yazılım çözümleri. İletişim: +90 542 698 2627.">
   <meta property="og:site_name" content="Ali Efekan Gökcen — Denizli AI Web Tasarım">
   <meta property="og:locale" content="tr_TR">
 
@@ -47,7 +47,7 @@
         "name": "Ali Efekan Gökcen — Denizli AI Web Sitesi Yaptırma & Web Tasarım",
         "alternateName": ["Efekan Gökcen", "Denizli AI Yazılımcı", "Denizli Web Sitesi Uzmanı"],
         "jobTitle": "Denizli Freelancer Yazılımcı & AI Web Tasarım Uzmanı",
-        "description": "Denizli'de yapay zekâ (AI) destekli kurumsal web siteleri, özel ERP/CRM yazılımları ve Next.js / .NET Core çözümleri sunmaktadır.",
+        "description": "Denizli'de Pamair, EN20, YapıGranit gibi kurumsal markalara ve işletmelere yapay zekâ (AI) destekli kurumsal web siteleri, özel ERP/CRM yazılımları geliştirmektedir.",
         "url": "https://sportssimulation.net/",
         "telephone": "+905426982627",
         "email": "mailto:efekangokcen@gmail.com",
@@ -360,7 +360,7 @@
 
     /* HERO HEADER */
     header.hero {
-      padding: 155px 0 85px;
+      padding: 155px 0 70px;
       position: relative;
     }
     .hero-grid {
@@ -559,39 +559,67 @@
       color: #ffffff;
     }
 
-    /* INTEREST COMPARISON SECTION */
-    .funnel-interest-section {
-      padding: 90px 0;
+    /* TRUST BRANDING BAR (PAMAIR, EN20, YAPIGRANIT, DOU SOCIAL) */
+    .trust-bar {
+      padding: 36px 0;
       background: #ffffff;
       border-y: 1px solid var(--border);
     }
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 26px;
-      margin-top: 44px;
+    .trust-label {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-faint);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
     }
-    .comp-card {
-      border-radius: 20px;
-      padding: 32px 28px;
+    .trust-grid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--text-dim);
+      opacity: 0.85;
+      transition: all 0.25s ease;
+      padding: 8px 16px;
+      border-radius: 12px;
+      background: #f8fafc;
       border: 1px solid var(--border);
-      transition: all 0.3s ease;
     }
-    .comp-bad {
-      background: #fff5f5;
-      border-color: #fecaca;
+    .trust-item:hover {
+      opacity: 1;
+      color: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(79, 70, 229, 0.08);
     }
-    .comp-bad h3 { color: #dc2626; font-size: 1.15rem; margin-bottom: 16px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
-    .comp-good {
-      background: #f0fdf4;
-      border-color: #bbf7d0;
-      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.07);
+    .trust-badge-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.78rem;
     }
-    .comp-good h3 { color: #16a34a; font-size: 1.15rem; margin-bottom: 16px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
-    .comp-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .comp-list li { font-size: 0.94rem; display: flex; gap: 10px; line-height: 1.5; }
 
-    /* SERVICES GRID */
+    /* SERVICES GRID (SERVICES FIRST) */
+    .services-section {
+      padding: 90px 0;
+    }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -636,6 +664,98 @@
       align-items: center;
       gap: 5px;
     }
+
+    /* REDESIGNED APPLE BENTO COMPARISON SECTION (KURUMSAL DİJİTAL FARKIMIZ) */
+    .digital-difference-section {
+      padding: 90px 0;
+      background: #ffffff;
+      border-y: 1px solid var(--border);
+    }
+    .bento-comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 28px;
+      margin-top: 44px;
+    }
+    .bento-card {
+      border-radius: 24px;
+      padding: 36px 32px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bento-old {
+      background: linear-gradient(180deg, #ffffff 0%, #fff1f2 100%);
+      border-color: #fecaca;
+    }
+    .bento-old-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .bento-badge-bad {
+      background: #ef4444;
+      color: #ffffff;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .bento-old h3 { font-size: 1.25rem; font-weight: 800; color: #991b1b; }
+
+    .bento-new {
+      background: linear-gradient(135deg, #ffffff 0%, rgba(79, 70, 229, 0.04) 100%);
+      border-color: rgba(79, 70, 229, 0.3);
+      box-shadow: 0 16px 45px rgba(79, 70, 229, 0.08);
+    }
+    .bento-new-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .bento-badge-good {
+      background: var(--gradient-text);
+      color: #ffffff;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+    }
+    .bento-new h3 { font-size: 1.35rem; font-weight: 900; color: var(--text); }
+
+    .bento-feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .bento-feature-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .bento-icon-box {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .bento-old .bento-icon-box { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
+    .bento-new .bento-icon-box { background: rgba(79, 70, 229, 0.12); color: var(--primary); }
+    .bento-icon-box svg { width: 16px; height: 16px; }
 
     /* FAQ ACCORDION */
     .faq-container {
@@ -942,7 +1062,7 @@
       header.hero { padding: 120px 0 50px; }
       nav .wrap { height: 66px; }
       .nav-links { display: none; }
-      .hero-grid, .about-grid, .skills-grid, .project-grid, .services-grid, .comparison-grid {
+      .hero-grid, .about-grid, .skills-grid, .project-grid, .services-grid, .bento-comparison-grid {
         grid-template-columns: 1fr;
         gap: 28px;
       }
@@ -952,6 +1072,7 @@
       .stat:nth-child(n+3) { border-top: 1px solid var(--border); }
       .contact-box { padding: 44px 20px; }
       .floating-whatsapp { bottom: 20px; right: 20px; padding: 11px 18px; font-size: 0.84rem; }
+      .trust-grid { gap: 16px; }
       footer .wrap { flex-direction: column; text-align: center; }
       .footer-links { justify-content: center; }
     }
@@ -964,7 +1085,7 @@
       .hero-actions { flex-direction: column; gap: 10px; width: 100%; }
       .hero-contact-row { flex-direction: column; align-items: flex-start; gap: 10px; }
       .phone-badge { width: 100%; justify-content: center; }
-      .comp-card { padding: 22px 18px; }
+      .bento-card { padding: 24px 20px; }
       .service-card { padding: 22px 18px; }
       .project-card { padding: 22px 18px; }
       .skill-card { padding: 22px 16px; }
@@ -998,7 +1119,7 @@
       </a>
       <div class="nav-links">
         <a href="#services">Denizli Web Hizmetleri</a>
-        <a href="#why-me">Neden Ben?</a>
+        <a href="#digital-difference">Kurumsal Farkımız</a>
         <a href="#projects">Projeler</a>
         <a href="#faq">SSS</a>
         <a href="#contact">İletişim</a>
@@ -1082,13 +1203,13 @@
             <div id="termOut"></div>
             <div class="terminal-input-row">
               <span class="prompt">efekan@denizli</span> <span class="path">~</span> <span class="cmd">$</span>
-              <input type="text" class="terminal-input" id="termInput" placeholder="komut yazın (örn: contact, services, projects)..." autocomplete="off">
+              <input type="text" class="terminal-input" id="termInput" placeholder="komut yazın (örn: contact, services, clients)..." autocomplete="off">
             </div>
           </div>
           <div class="terminal-chips">
             <span class="tchip" data-cmd="contact">contact</span>
             <span class="tchip" data-cmd="services">services</span>
-            <span class="tchip" data-cmd="projects">projects</span>
+            <span class="tchip" data-cmd="clients">clients</span>
             <span class="tchip" data-cmd="whoami">whoami</span>
             <span class="tchip" data-cmd="clear">clear</span>
           </div>
@@ -1097,39 +1218,32 @@
     </div>
   </header>
 
-  <!-- FUNNEL STEP 2: INTEREST (PROBLEM & SOLUTION COMPARISON) -->
-  <section class="funnel-interest-section" id="why-me">
+  <!-- TRUST BRANDING BAR (PAMAIR, EN20, YAPIGRANIT, DOU SOCIAL) -->
+  <div class="trust-bar">
     <div class="wrap">
-      <div class="section-head apple-reveal">
-        <div class="section-tag">DENİZLİ WEB TASARIM ÖNCELİĞİ</div>
-        <h2>Neden Klasik Web Siteleri Değil?</h2>
-        <p>Klasik, yavaş ve güncellenmeyen web siteleri Denizli ve çevresindeki potansiyel müşterilerinizi rakibe kaçırır. İşte farkım:</p>
-      </div>
-
-      <div class="comparison-grid apple-reveal">
-        <div class="comp-card comp-bad">
-          <h3>❌ Klasik &amp; Yavaş Web Siteleri</h3>
-          <ul class="comp-list">
-            <li>❌ Telefonda yavaş açılır, müşteri hemen siteden çıkar.</li>
-            <li>❌ Google'da aramalarda geride kalır, görünmez olur.</li>
-            <li>❌ Eski şablonlar güvensiz görünür, sipariş aldırmaz.</li>
-            <li>❌ Proje bittikten sonra muhatap bulunamaz.</li>
-          </ul>
+      <div class="trust-label">DENİZLİ'DE ÇALIŞTIĞIM &amp; GÜVENİLEN KURUMSAL MARKALAR</div>
+      <div class="trust-grid apple-reveal">
+        <div class="trust-item">
+          <div class="trust-badge-icon">P</div>
+          <span>PAMAIR</span>
         </div>
-        <div class="comp-card comp-good">
-          <h3>✅ Efekan Gökcen Web &amp; Yapay Zekâ Çözümleri</h3>
-          <ul class="comp-list">
-            <li>✅ <strong>Işık Hızında Açılış:</strong> Next.js 16 ile anında yüklenen web sayfaları.</li>
-            <li>✅ <strong>Denizli Google SEO Odaklı:</strong> Potansiyel müşterilerinizin sizi aramada bulması.</li>
-            <li>✅ <strong>Yapay Zekâ (AI) Desteği:</strong> Sitenizde 7/24 müşteri karşılayan GPT-4o entegrasyonu.</li>
-            <li>✅ <strong>Kesintisiz 7/24 Destek:</strong> İş tesliminden sonra da hızlı iletişim ve bakım.</li>
-          </ul>
+        <div class="trust-item">
+          <div class="trust-badge-icon" style="background:#ec4899;">EN</div>
+          <span>EN20</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-badge-icon" style="background:#06b6d4;">YG</div>
+          <span>YapıGranit ERP</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-badge-icon" style="background:#8b5cf6;">DOU</div>
+          <span>DOU Social Agency</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- SERVICES SECTION -->
+  <!-- SERVICES SECTION (MOVED BEFORE COMPARISON AS REQUESTED) -->
   <section class="services-section" id="services">
     <div class="wrap">
       <div class="section-head apple-reveal">
@@ -1178,13 +1292,94 @@
     </div>
   </section>
 
+  <!-- REDESIGNED KURUMSAL DİJİTAL FARKIMIZ SECTION (RENAMED & REDESIGNED BENTO CARD) -->
+  <section class="digital-difference-section" id="digital-difference">
+    <div class="wrap">
+      <div class="section-head apple-reveal">
+        <div class="section-tag">KURUMSAL DİJİTAL FARKIMIZ</div>
+        <h2>Neden Efekan Gökcen Modern Altyapısı?</h2>
+        <p>Denizli'de sıradan, eski web siteleri ile işletmenize özel tasarladığım modern mimari arasındaki farklar.</p>
+      </div>
+
+      <div class="bento-comparison-grid apple-reveal">
+        <!-- Old Slow Way -->
+        <div class="bento-card bento-old">
+          <div class="bento-old-header">
+            <span class="bento-badge-bad">ESKİ TEKNOLOJİ</span>
+            <h3>Sıradan &amp; Yavaş Siteler</h3>
+          </div>
+          <ul class="bento-feature-list">
+            <li class="bento-feature-item">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </div>
+              <div><strong>Telefonda Yavaş Açılış:</strong> Şablon ağır kütüphaneler yüzünden müşteri sayfayı terk eder.</div>
+            </li>
+            <li class="bento-feature-item">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </div>
+              <div><strong>Aramalarda Kaybolma:</strong> Google SEO standartlarına uymayan eski altyapı.</div>
+            </li>
+            <li class="bento-feature-item">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </div>
+              <div><strong>Güvensiz Şablonlar:</strong> Müşterilerin sipariş vermekten çekindiği amatör görünüm.</div>
+            </li>
+            <li class="bento-feature-item">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </div>
+              <div><strong>Ulaşılamayan Destek:</strong> Proje bittikten sonra muhatap bulamama sorunu.</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Efekan Gökcen Modern AI Solution -->
+        <div class="bento-card bento-new">
+          <div class="bento-new-header">
+            <span class="bento-badge-good">PREMIUM AI MİMARİ</span>
+            <h3>Efekan Gökcen Mimarisi</h3>
+          </div>
+          <ul class="bento-feature-list">
+            <li class="bento-feature-item">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div><strong>Işık Hızında Next.js 16 Altyapısı:</strong> Mobil cihazlarda 0.2 saniyede açılan sayfalar.</div>
+            </li>
+            <li class="bento-feature-item">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div><strong>Google &amp; AI Arama Üst Sıra (SEO/GEO):</strong> Denizli aramalarında ilk sıralara oynayan yapı.</div>
+            </li>
+            <li class="bento-feature-item">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div><strong>Yapay Zekâ (OpenAI GPT-4o) Asistanı:</strong> Sitenize gelen müşterileri 7/24 karşılayan akıllı bot.</div>
+            </li>
+            <li class="bento-feature-item">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div><strong>Doğrudan İletişim &amp; 7/24 Destek:</strong> Denizli lokasyonlu telefon ve WhatsApp ile anında çözüm.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FUNNEL STEP 3: DESIRE & PROOF (PROJECTS) -->
   <section id="projects">
     <div class="wrap">
       <div class="section-head apple-reveal">
         <div class="section-tag">03 · KANITLANMIŞ PROJELER</div>
         <h2>Tamamlanan Canlı Çalışmalar</h2>
-        <p>Fabrikalardan ajanslara kadar geliştirdiğim gerçek dünya yazılım projeleri.</p>
+        <p>Pamair, EN20 gibi kurumsal firmalara ve ajanslara geliştirdiğim gerçek dünya yazılım projeleri.</p>
       </div>
 
       <div class="project-grid">
@@ -1323,11 +1518,11 @@
 
         <div class="faq-item">
           <div class="faq-question">
-            <span>3. Web sitem Google'da üst sıralara çıkar mı?</span>
+            <span>3. Pamair, EN20 gibi referans kurumsal projelerdeki deneyiminiz nedir?</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
           <div class="faq-answer">
-            Evet! Geliştirdiğim tüm web siteleri "Denizli web tasarım", "Denizli AI web sitesi" gibi yerel aramalarda üst sıralara çıkmak üzere %100 SEO &amp; GEO uyumlu olarak kodlanır.
+            Denizli'deki kurumsal firmalara dijital süreç yönetimi, özel yazılım çözümleri ve modern web mimarileri sunuyoruz. Her projede veri güvenliği ve yüksek performans esastır.
           </div>
         </div>
 
@@ -1354,7 +1549,7 @@
       <div class="about-grid">
         <div class="about-body apple-reveal">
           <p>
-            Akademik geçmişimi <strong>Yönetim Bilişim Sistemleri (MIS)</strong> alanında sürdürüyorum. Denizli merkezli olarak freelance web tasarım, özel kurumsal yazılım geliştirme ve yapay zekâ çözümleri sunuyorum.
+            Akademik geçmişimi <strong>Yönetim Bilişim Sistemleri (MIS)</strong> alanında sürdürüyorum. Pamair, EN20 gibi Denizli merkezli kurumsal firmalara ve işletmelere freelance web tasarım, özel yazılım geliştirme ve yapay zekâ çözümleri sunuyorum.
           </p>
           <p>
             Full-stack web geliştirme tarafında <strong>Next.js 16, React 19, .NET Core ve PostgreSQL</strong> teknolojileriyle projeler üretiyorum. Yazılımlarıma <strong>OpenAI GPT-4o API</strong> entegrasyonu yaparak akıllı ve pratik çözümler sunuyorum.
@@ -1366,7 +1561,7 @@
         <ul class="method-list">
           <li class="apple-reveal">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Denizli Web Sitesi Yaptırma &amp; Kurumsal Web Tasarım
+            Denizli Kurumsal Web Sitesi &amp; Pamair, EN20 Güvencesi
           </li>
           <li class="apple-reveal">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
@@ -1471,7 +1666,7 @@
       <div class="contact-box apple-reveal">
         <h2>Denizli AI Web Sitesi Projeniz İçin Teklif Alın</h2>
         <p>
-          İşletmenize özel web sitesi veya yapay zekâ entegrasyonu fikriniz için doğrudan iletişime geçin. WhatsApp üzerinden hemen fiyat teklifi alın!
+          Pamair, EN20 gibi kurumsal firmalara sunduğumuz kalitede web sitesi veya yapay zekâ yazılım fikriniz için doğrudan iletişime geçin.
         </p>
 
         <div class="contact-direct-card">
@@ -1653,6 +1848,13 @@
           '  3. Yapay Zekâ (OpenAI GPT-4o) API Entegrasyonları',
           '  4. 7/24 Bakım & Güvenlik Desteği'
         ],
+        clients: [
+          'Denizli Kurumsal Referanslar & Markalar:',
+          '  - PAMAIR (İklimlendirme & Havalandırma)',
+          '  - EN20 (Endüstriyel Teknoloji & Kurumsal)',
+          '  - YapıGranit ERP (Doğal taş üretim yazılımı)',
+          '  - DOU Social Agency (Dijital süreç CRM)'
+        ],
         projects: [
           '1. YapıGranit ERP (Doğal taş sektörü kesim optimizasyonu)',
           '2. DOU Social CRM (Ajans süreç takibi & AES-256 güvenlik)',
@@ -1661,13 +1863,14 @@
         ],
         whoami: [
           'Ali Efekan Gökcen — Denizli AI Web Sitesi & Freelancer Yazılımcı',
-          'Denizli ve tüm Türkiye\'deki işletmeler için web siteleri geliştiriyorum.',
+          'Pamair, EN20 ve kurumsal Denizli firmalarına özel yazılımlar geliştiriyorum.',
           'İletişim: +90 542 698 2627'
         ],
         help: [
           'Kullanılabilir komutlar:',
           '  contact  - Telefon & WhatsApp bilgisi',
           '  services - Denizli hizmetleri',
+          '  clients  - Kurumsal markalar (Pamair, EN20...)',
           '  projects - Örnek projeler',
           '  whoami   - Profil özeti',
           '  clear    - Ekranı temizle'
@@ -1685,7 +1888,7 @@
       }
 
       printLines([
-        'Sistem Başlatıldı: Ali Efekan Gökcen CLI v10.0 (Denizli AI SEO Engine)',
+        'Sistem Başlatıldı: Ali Efekan Gökcen CLI v11.0 (Kurumsal Trust & Bento Engine)',
         'İletişim: +90 542 698 2627 | WhatsApp İletişim Açık'
       ]);
 
